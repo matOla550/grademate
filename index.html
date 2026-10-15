@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GradeMate Results</title>
+
+  <!-- Google Fonts: Merriweather for headings, Source Sans 3 for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="brand">
+      <svg class="logo-icon" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="10" fill="#0E7C86"></rect>
+        <path d="M20 10L5 17l15 7 15-7-15-7z" fill="#FFFFFF"></path>
+        <path d="M11 21v6c0 2 4 4 9 4s9-2 9-4v-6l-9 4-9-4z" fill="#FFFFFF" fill-opacity="0.85"></path>
+        <path d="M34 18v8" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+      </svg>
+      <span class="brand-name">GradeMate</span>
+    </div>
+    <span class="tagline">Student Result Calculator</span>
+  </header>
+
+  <main class="page">
+
+    <!-- ===== VIEW 1: ENTER SCORES ===== -->
+    <section id="entry-view" class="entry">
+      <div class="intro">
+        <h1>Work out a student's result</h1>
+        <p>Enter the student's details and five subject scores. GradeMate shows the total, the average, and a grade for each subject.</p>
+      </div>
+
+      <!-- "novalidate" lets our own JavaScript show the error messages -->
+      <form id="result-form" class="sheet" novalidate>
+
+        <!-- Red summary box, shown only when something is wrong -->
+        <div id="error-summary" class="error-summary" role="alert" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"></path><path d="M12 10v5M12 18v.01"></path></svg>
+          <p id="error-summary-text"></p>
+        </div>
+
+        <fieldset class="group">
+          <legend>1. Student details</legend>
+          <div class="field-grid">
+            <div class="field">
+              <label for="student-name">Student name</label>
+              <input id="student-name" class="input" type="text" placeholder="e.g. Amina Bello" autocomplete="off">
+              <p id="error-student-name" class="error-message" hidden></p>
+            </div>
+            <div class="field">
+              <label for="student-class">Class</label>
+              <input id="student-class" class="input" type="text" placeholder="e.g. JSS 3B" autocomplete="off">
+              <p id="error-student-class" class="error-message" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>2. Subject scores</legend>
+
+          <p class="note">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5.5M12 7.5v.01"></path></svg>
+            <span>Every score must be a whole number from 0 to 100.</span>
+          </p>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="score-maths">Mathematics</label>
+              <div class="score-input"><input id="score-maths" type="number" inputmode="numeric" placeholder="0 - 100"><span class="out-of">/ 100</span></div>
+              <p id="error-score-maths" class="error-message" hidden></p>
+            </div>
+            <div class="field">
+              <label for="score-english">English Language</label>
+              <div class="score-input"><input id="score-english" type="number" inputmode="numeric" placeholder="0 - 100"><span class="out-of">/ 100</span></div>
+              <p id="error-score-english" class="error-message" hidden></p>
+            </div>
+            <div class="field">
+              <label for="score-science">Basic Science</label>
+              <div class="score-input"><input id="score-science" type="number" inputmode="numeric" placeholder="0 - 100"><span class="out-of">/ 100</span></div>
+              <p id="error-score-science" class="error-message" hidden></p>
+            </div>
+            <div class="field">
+              <label for="score-computer">Computer Studies</label>
+              <div class="score-input"><input id="score-computer" type="number" inputmode="numeric" placeholder="0 - 100"><span class="out-of">/ 100</span></div>
+              <p id="error-score-computer" class="error-message" hidden></p>
+            </div>
+            <div class="field">
+              <label for="score-social">Social Studies</label>
+              <div class="score-input"><input id="score-social" type="number" inputmode="numeric" placeholder="0 - 100"><span class="out-of">/ 100</span></div>
+              <p id="error-score-social" class="error-message" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Calculate Results</button>
+          <button class="btn btn-outline" type="reset">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== VIEW 2: RESULTS ===== -->
+    <section id="results-view" class="results" hidden>
+      <div class="sheet result-sheet">
+
+        <div class="sheet-top">
+          <div>
+            <span class="sheet-label">Student result sheet</span>
+            <h1 id="result-name" class="result-name">Student name</h1>
+          </div>
+          <p class="result-class">Class: <strong id="result-class">Class</strong></p>
+        </div>
+
+        <div class="cards">
+          <div class="card card-total">
+            <span class="card-label">Total score</span>
+            <span class="card-value"><span id="total-score">0</span><small> / 500</small></span>
+          </div>
+          <div class="card card-average">
+            <span class="card-label">Average score</span>
+            <span class="card-value"><span id="average-score">0</span><small> / 100</small></span>
+          </div>
+          <div class="card card-overall">
+            <span class="card-label">Overall remark</span>
+            <span id="overall-remark" class="card-value card-remark">Excellent</span>
+            <span id="overall-grade" class="card-sub">Grade A overall</span>
+          </div>
+        </div>
+
+        <!-- The table sits in a box that scrolls sideways if it ever gets too wide -->
+        <div class="table-wrap">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th scope="col">Subject</th>
+                <th scope="col" class="col-score">Score</th>
+                <th scope="col" class="col-grade">Grade</th>
+                <th scope="col">Remark</th>
+              </tr>
+            </thead>
+            <!-- The subject rows are added here by JavaScript -->
+            <tbody id="results-body"></tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td id="table-total" class="col-score"></td>
+                <td id="table-grade" class="col-grade"></td>
+                <td id="table-remark"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="actions">
+          <button id="print-button" class="btn btn-primary" type="button">Print Results</button>
+          <button id="edit-button" class="btn btn-outline" type="button">Edit Scores</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

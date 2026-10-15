@@ -1,0 +1,639 @@
+/* =====================================================
+   GradeMate - style.css
+   Change the values in :root to restyle the whole app.
+   ===================================================== */
+
+:root {
+  /* Colours */
+  --navy: #14305A;
+  --teal: #0E7C86;
+  --teal-dark: #0A6169;
+  --teal-text: #0B5F67;
+  --ink: #16202E;           /* main text */
+  --muted: #5A6678;         /* labels and units */
+  --page: #F3F6FA;          /* page background */
+  --surface: #FFFFFF;       /* sheets and cards */
+  --border: #D5DCE6;
+  --input-border: #AEB9C9;
+  --row-line: #E3E8F0;
+  --stripe: #F7F9FC;
+  --error: #B3261E;
+  --error-bg: #FDECEA;
+  --info-bg: #E6F4F5;
+  --info-border: #B4DDE0;
+
+  /* Fonts */
+  --font-heading: "Merriweather", Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+}
+
+/* ---------- Basic reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+h1, p {
+  margin: 0;
+}
+
+/* JavaScript shows and hides things with the "hidden" attribute */
+[hidden] {
+  display: none !important;
+}
+
+button:focus-visible,
+.input:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 48px;
+  background: var(--navy);
+  color: #FFFFFF;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.tagline {
+  font-size: 15px;
+  font-weight: 600;
+  color: #BFD0E6;
+}
+
+/* ---------- Page container ---------- */
+.page {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+}
+
+.entry {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.intro h1 {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.intro p {
+  margin-top: 8px;
+  font-size: 19px;
+  line-height: 1.55;
+  color: #4A5668;
+}
+
+/* A white "sheet of paper" used for the form and the results */
+.sheet {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ---------- Error summary box ---------- */
+.error-summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--error-bg);
+  border: 1px solid #E8B4AF;
+  border-radius: 10px;
+  color: #8C1D17;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.error-summary svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--error);
+}
+
+/* ---------- Form groups ---------- */
+.group {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group legend {
+  padding: 0;
+  margin-bottom: 16px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--info-bg);
+  border: 1px solid var(--info-border);
+  border-radius: 10px;
+  color: var(--teal-text);
+  font-weight: 600;
+}
+
+.note svg {
+  flex-shrink: 0;
+}
+
+/* Fields sit in columns that wrap on small screens */
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field label {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 17px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+}
+
+/* A score box: the number input plus the "/ 100" label share one border */
+.score-input {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 14px;
+  background: var(--surface);
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+}
+
+.score-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.score-input input:focus {
+  outline: none;
+}
+
+.out-of {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* Teal border while typing */
+.input:focus,
+.score-input:focus-within {
+  border-color: var(--teal);
+}
+
+/* Red look when a field has a problem (JavaScript adds .has-error) */
+.input.has-error,
+.score-input.has-error {
+  border-color: var(--error);
+  background: #FFF8F7;
+}
+
+.error-message {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--error);
+}
+
+/* ---------- Buttons ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--row-line);
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  min-height: 52px;
+  padding: 12px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--teal-dark);
+}
+
+.btn-outline {
+  background: var(--surface);
+  color: var(--navy);
+  border: 2px solid var(--navy);
+}
+
+.btn-outline:hover {
+  background: #EEF2F8;
+}
+
+/* =====================================================
+   RESULTS VIEW
+   ===================================================== */
+.sheet-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--navy);
+  margin-bottom: -4px;
+}
+
+.sheet-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.result-name {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+
+.result-class {
+  font-size: 17px;
+  font-weight: 600;
+  color: #4A5668;
+}
+
+.result-class strong {
+  color: var(--ink);
+}
+
+/* Three summary cards: total, average, overall remark */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.card-total {
+  border-top: 4px solid var(--navy);
+}
+
+.card-average {
+  border-top: 4px solid var(--teal);
+}
+
+.card-overall {
+  background: #EEF8F1;
+  border: 1px solid #B6DEC3;
+  border-top: 4px solid #1D6B3A;
+}
+
+.card-label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card-value {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--navy);
+}
+
+.card-value small {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.card-average .card-value {
+  color: var(--teal-text);
+}
+
+.card-remark {
+  font-size: 30px;
+  color: #1D6B3A;
+}
+
+.card-overall .card-label,
+.card-sub {
+  color: #3D6B4F;
+}
+
+.card-sub {
+  font-size: 15px;
+}
+
+/* ---------- Results table ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.results-table {
+  width: 100%;
+  min-width: 360px;
+  border-collapse: collapse;
+  font-size: 17px;
+  text-align: left;
+}
+
+.results-table th {
+  padding: 14px 18px;
+  background: var(--navy);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.results-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--row-line);
+}
+
+/* Every second row is slightly grey so rows are easy to follow */
+.results-table tbody tr:nth-child(even) {
+  background: var(--stripe);
+}
+
+.results-table .col-score {
+  text-align: right;
+  font-weight: 700;
+}
+
+.results-table .col-grade {
+  text-align: center;
+}
+
+.results-table th.col-score {
+  text-align: right;
+}
+
+.results-table td:first-child {
+  font-weight: 600;
+}
+
+.results-table tfoot td {
+  background: #E8EEF6;
+  font-weight: 700;
+  border-bottom: none;
+}
+
+/* Grade badge: a coloured box with the letter inside */
+.grade-badge {
+  display: inline-block;
+  min-width: 32px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.grade-a { background: #DDF3E4; color: #1D6B3A; }
+.grade-b { background: #DDF1F2; color: #0B5F67; }
+.grade-c { background: #E6ECFA; color: #25459A; }
+.grade-d { background: #FFF1D6; color: #8A5300; }
+.grade-f { background: #FDECEA; color: #B3261E; }
+
+/* =====================================================
+   RESPONSIVE: tablets and phones
+   ===================================================== */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 12px 16px;
+  }
+
+  .brand-name {
+    font-size: 19px;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .page {
+    padding: 24px 16px 40px;
+  }
+
+  .intro h1 {
+    font-size: 25px;
+  }
+
+  .intro p {
+    font-size: 17px;
+  }
+
+  .sheet {
+    padding: 16px;
+    gap: 22px;
+  }
+
+  /* Name and class stay side by side; scores go in two columns */
+  .field-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 12px;
+  }
+
+  .field label {
+    font-size: 14px;
+  }
+
+  .note {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+
+  /* Buttons fill the width */
+  .actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .result-name {
+    font-size: 24px;
+  }
+
+  /* Total and Average side by side, Overall remark underneath */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    padding: 10px 12px;
+  }
+
+  .card-value {
+    font-size: 26px;
+  }
+
+  .card-value small {
+    font-size: 14px;
+  }
+
+  .card-overall {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+  }
+
+  .card-remark {
+    font-size: 20px;
+  }
+
+  .card-sub {
+    display: none;
+  }
+
+  /* Smaller table text so all four columns fit */
+  .results-table {
+    font-size: 14px;
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 10px 6px;
+  }
+
+  .results-table th:first-child,
+  .results-table td:first-child {
+    width: 36%;
+    padding-left: 10px;
+  }
+
+  .results-table .col-score,
+  .results-table .col-grade {
+    width: 15%;
+  }
+
+  .grade-badge {
+    min-width: 24px;
+    padding: 2px 6px;
+  }
+}
+
+/* =====================================================
+   PRINT: what the page looks like on paper
+   ===================================================== */
+@media print {
+  body {
+    background: #FFFFFF;
+  }
+
+  .site-header,
+  .actions,
+  #entry-view {
+    display: none !important;
+  }
+
+  .page {
+    padding: 0;
+  }
+
+  .sheet {
+    border: none;
+    padding: 0;
+  }
+
+  .results-table th {
+    background: #FFFFFF;
+    color: #000000;
+    border-bottom: 2px solid #000000;
+  }
+}
